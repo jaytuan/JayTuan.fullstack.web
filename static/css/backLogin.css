@@ -1,0 +1,72 @@
+/*样式初始化代码*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#555; font-size:14px; font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; }
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:underline; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px 'Microsoft YaHei',Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;} 
+/* css common */
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+.bg_icon{
+	background: url("../img/icon.png");
+}
+body{
+	width:1900px;
+}
+.main{
+	margin: 60px 820px;
+}
+.main .title{
+	font-size: 24px;
+	color:#999;
+}
+.main .login_info{
+	position: relative;
+}
+.main .login_info .uname_bg,.main .login_info .pwd_bg{
+	display: inline-block;
+	width: 15px;
+	height: 18px;
+	background-position: -6px -4px;
+	position: absolute;
+	left: 6px;
+	top: 14px;
+	border-right: solid 1px #ccc;
+	padding-right: 6px;
+}
+.main .login_info .pwd_bg{
+	background-position: -30px -4px;
+	top: 60px;
+}
+.login_username,.login_pwd{
+	height: 24px;
+	border: solid 1px #aaa;
+	width:180px;
+	padding-left: 33px;
+	margin: 10px 0;
+}
+.main .login_info .login_btn,.main .login_info .reset_btn{
+	width: 100px;
+	display: inline-block;
+}
+.main .login_info .login_btn{
+	margin-left: 11px;
+}
+.main .login_info .err_infor{
+	color:red;
+	margin-top: -20px;
+	margin-left: 30px;
+}
+.mb20{
+	margin-bottom: 20px;
+}
+.none{
+	display: none;
+}

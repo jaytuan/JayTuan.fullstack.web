@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type","text/html;charset=utf-8">
+	<title>JNews</title>
+	<script type="text/javascript" src="//file.40017.cn/tcweb/pc/public/js/common/jquery/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="//file.40017.cn/huochepiao/pc/product/pcjs/doT.min.js?v=2017060603"></script>
+	<script type="text/javascript" src="http://ljt.qitouch.cn/static/js/newsList.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://ljt.qitouch.cn/static/css/newsList.css" />
+</head>
+<body>
+	<div class="top">
+		<div class="search"><input class="search_keyword" type='text' maxlength="50" /><span class='bg_icon search_btn'></span></div>
+	</div>
+	<div class='news_head'>
+		<ul class='news_type'></ul>
+	</div>
+	<div class='news_content'>
+		<div class="banner">
+			<ul class="banner_ul"></ul>
+		</div>
+		<div class="top_line">
+			<span class='top_line_title'>头条大事</span>
+			<div class='top_line_news'></div>
+		</div>
+		<div class='newslistboard'>
+			<h2>热点新闻</h2>
+			<div class='newslist'></div>
+		</div>
+	</div>
+	<div class="null_search_result none">很抱歉，搜索结果为空!</div>
+	<div class="footer"></div>
+	<script id="newsTypeList" type="text/x-dot-template">
+		<li class="new_type selected">首页</li>
+		{{~it:value}}
+			<li class="new_type" _classifyName="{{=value.ClassifyName}}">{{=value.ClassifyName}}</li>
+		{{~}}
+	</script>
+	<script id="topLines" type="text/x-dot-template">
+		{{~it:value:index}}
+			{{?index<2}}
+				<a _id='{{=value.ID}}' title='{{=value.NewsTitle}}' href='/pages/newsDetail.html?id={{=value.ID}}' class="newsTitle">{{=value.NewsTitle}}</a>
+				<a _id='{{=value.ID}}' title='{{=value.NewsShortContent}}' href='/pages/newsDetail.html?id={{=value.ID}}' class="newsCont {{?index==0}}borderBottom{{?}}">{{=value.NewsShortContent }}</a>
+			{{?}}
+		{{~}}
+	</script>
+	<script id="listTemp" type="text/x-dot-template">
+		{{~it:value:index}}
+			<div class='news_model'>
+				<p><a _id='{{=value.ID}}' href='/pages/newsDetail.html?id={{=value.ID}}'>{{=value.NewsTitle}}</a><span class='timestr'>{{=value.timeStr}}</span></p>
+				<p class='commary'>{{=value.NewsShortContent}}</p>
+				<p class='comment'><span>作者：<em>{{=value.Author}}</em></span><span>公司：<em>{{=value.companyName}}</em></span><span>公司电话：<em>{{=value.companyTel}}</em></span><span>公司地址：<em>{{=value.CoAddr}}</em></span></p>
+			</div>
+		{{~}}
+	</script>
+	<script id="bannerTemp" type="text/x-dot-template">
+		{{~it:value:index}}
+			<li class="banner_li {{?index!=0}}none{{?}}" _id="{{=value.ID}}"><img title='{{=value.NewsShortContent}}' src="{{=value.HotImg}}">
+				<a class='newsTitle'>{{=value.NewsTitle}}</a>
+			</li>
+		{{~}}
+	</script>
+	<script id="fenye" type="text/x-dot-template">
+		{{?it.total >11 && it.now>6 }}<span class="beforePage" onclick="pageHandler.renderList(1,false)">首页</span>{{?}}
+		{{?it.now >1}}<span class="beforePage" onclick="pageHandler.renderList({{=it.now-1}},false)">上一页</span>{{?}}
+		{{	var i = 1;
+			for(;i<=it.total;i++){
+				if((it.now<6 && i<12) || (it.now>it.total-5 && i>it.total-11) || (i<it.now+6 && i>it.now-6)){
+					}}
+					<span class="fenyeIndex {{?i==it.now}}nowPage{{?}}" onclick="pageHandler.renderList({{=i}},false)">{{=i}}</span>
+					{{
+				}
+			} 
+		}}
+		{{?it.now<it.total}}<span class="nextPage" onclick="pageHandler.renderList({{=it.now+1}},false)">下一页</span>{{?}}
+		{{?it.total >11 && it.now<it.total-5}}<span class="nextPage" onclick="pageHandler.renderList({{=it.total}},false)">尾页</span>{{?}}
+	</script>
+	<script id="popWin" type="text/x-dot-template">
+		<div class="disabled_bg"></div>
+		<div class="pop_Msg_Win">
+			<span class="msgTitle">
+			{{?it.Title}}{{=it.Title}}{{??}}温馨提示{{?}}</span><i class='closeBtn bg_icon'></i>
+			<div class="msgContent">{{=it.Content}}</div>
+			{{?it.btns && it.btns.length>0}}
+				{{~it.btns:value}}
+					<span class="defineBtn {{=value.btnClassName}}">{{=value.btnName}}</span>
+				{{~}}
+			{{??}}
+				<span class="known">知道了</span>
+			{{?}}
+		</div>
+	</script>
+</body>
+</html>

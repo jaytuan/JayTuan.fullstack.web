@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type","text/html;charset=utf-8">
+		<title>新闻发布系统</title>
+		<script type="text/javascript" src="//file.40017.cn/tcweb/pc/public/js/common/jquery/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="//file.40017.cn/huochepiao/pc/product/pcjs/doT.min.js?v=2017060603"></script>
+		<link rel="stylesheet" type="text/css" href="../static/css/backOp.css" />
+	</head>
+	<body>
+		<div class="top">
+			<div class="top_content">
+					<div class="top_logout none">Hi，<a>JayAdam</a><a class="logout">退出</a></div>
+					<div class="top_login none">您还没有登录，请<a href='/pages/backLogin.html'>登录</a></div>
+			</div>
+		</div>
+		<span class="news_title">新闻发布系统</span>
+		<div class="left_menu none">
+			<ul>
+				<li class="left_menu_item selected">新闻管理</li>
+				<li class="left_menu_item">账户管理</li>
+				<li class="left_menu_item">新闻公司管理</li>
+			</ul>
+		</div>
+		<div class="content">
+			<div class="content_menu">
+				<ul>
+					<li class="published current">已发布<em>(包含待审批)</em></li>
+					<li class="checking">正在审核</li>
+					<li class="approve">待审批</li>
+					<li class="timeout">已过期</li>
+					<li class="publish_news">发布新闻</li>
+					<li class='jump_to_user'><a href='/pages/newsList.html'>线上用户页</a></li>
+				</ul>
+			</div>
+			<div class="item published none">
+				<div class="top_op">
+					<span class="multimeout">批量无效</span>
+					<!-- <div class="filter"><span>筛选</span><span><input class="inuse" type='checkbox'/>有效</span><span><input class="useless" type='checkbox'/>无效</span></div> -->
+				</div>
+				<div class="published_board">
+					<table class="list_header">
+						<tbody>
+							<tr>
+								<td style="width:6%"><label for="published_select_all" class="select_all">
+									<input type="checkbox" id="published_select_all">全选
+								</label></td>
+								<td style="width:22%">新闻标题</td>
+								<td style="width:14%">创建时间</td>
+								<td style="width:8%">新闻作者</td>
+								<td style="width:8%">新闻发布者</td>
+								<td style="width:7%">是否有效</td>
+								<td style="width:7%">新闻类别</td>
+								<td style="width:10%">是否审批完成</td>
+								<td style="width:11%">操作</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="news_list"></div>
+				</div>
+				<div class="fenye"></div>
+			</div>
+			<div class="item checking none">
+				<div class="published_board">
+					<table class="list_header">
+						<tbody>
+							<tr>
+								<td style="width:22%">新闻标题</td>
+								<td style="width:22%">新闻概要</td>
+								<td style="width:15%">创建时间</td>
+								<td style="width:8%">新闻发布者</td>
+								<td style="width:10%">新闻类别</td>
+								<td style="width:12%">状态</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="approving_news_list"></div>
+				</div>
+				<div class="fenye"></div>
+			</div>
+			<div class="item approve none">
+				<div class="top_op">
+					<span class="mul_approve">批量审批成功</span>
+				</div>
+				<div class="published_board">
+					<table class="list_header">
+						<tbody>
+							<tr>
+								<td style="width:6%"><label for="approve_select_all" class="select_all">
+									<input type="checkbox" id="approve_select_all">全选
+								</label></td>
+								<td style="width:22%">新闻标题</td>
+								<td style="width:22%">新闻概要</td>
+								<td style="width:15%">创建时间</td>
+								<td style="width:8%">新闻发布者</td>
+								<td style="width:10%">新闻类别</td>
+								<td style="width:12%">操作</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="need_approve_news_list"></div>
+				</div>
+				<div class="fenye"></div>
+			</div>
+			<div class="item timeout none">
+					<div class="top_op">
+						<span class="multiDel">批量删除</span>
+						<!-- <div class="filter"><span>筛选</span><span><input class="inuse" type='checkbox'/>有效</span><span><input class="useless" type='checkbox'/>无效</span></div> -->
+					</div>
+					<div class="published_board">
+						<table class="list_header">
+							<tbody>
+								<tr>
+									<td style="width:6%"><label for="timeout_select_all" class="select_all">
+										<input type="checkbox" id="timeout_select_all">全选
+									</label></td>
+									<td style="width:22%">新闻标题</td>
+									<td style="width:14%">创建时间</td>
+									<td style="width:8%">新闻作者</td>
+									<td style="width:8%">新闻发布者</td>
+									<td style="width:7%">是否有效</td>
+									<td style="width:7%">新闻类别</td>
+									<td style="width:8%">上次修改人</td>
+									<td style="width:11%">操作</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="news_list"></div>
+					</div>
+					<div class="fenye"></div>
+			</div>
+			<div class="item publish_news none" id="addNews" >
+					<p><span class="inputTitle"><em>*</em>新闻标题</span><input required autocomplete="off" class="newsTitle" type="text" maxlength="100" placeholder="请输入新闻标题"></p>
+					<p><span class="inputTitle"><em>*</em>新闻内容简介</span><textarea required class="newsSipIntro" rows="3" cols="70"  maxlength="200"  placeholder="我这里写新闻简介哦"></textarea></p>
+					<p><span class="inputTitle"><em>*</em>是否有效</span><label for="inUse"><input type='radio' id="inUse" name="isInUse" checked value='1' />是</label><label for="notInUse"><input type='radio' name="isInUse" id="notInUse" value='1'/>否</label></p>
+					<p><span class="inputTitle"><em>*</em>新闻正文</span><textarea required class="newsContent"  rows="15" cols="70" form="addNews" maxlength="1000"  placeholder="我这里写新闻正文哦"></textarea></p>
+					<p><span class="inputTitle"><em>*</em>作者</span><input autocomplete="off" required class="authorName" type="text" maxlength="10" /></p>
+					<p><span class="inputTitle"><em>*</em>所属报社公司</span><select class="companyName"></select></p>
+					<p><span class="inputTitle"><em>*</em>所属分类</span><select class="newsType"></select></p>
+					<!-- <p><span class="inputTitle">&nbsp;标题图片</span><input name="HotImg" type="file" /></p>
+					<p><span class="inputTitle">&nbsp;正文图片</span><input name="HotContImg" type="file" /></p> -->
+					<input type="hidden" class="creater" name="Creater"  />
+					<input class="submit_btn" type="submit" value="提交审核" class="submit_btn" />
+			</div>
+		</div>
+		<div class="pop_Msg none"></div>
+		<div class="pop_NewsInforDetail none"></div>
+	</body>
+	<script type="text/javascript" src="../static/js/backOp.js"></script>
+	<script id="newsTypeSelect" type="text/x-dot-template">s
+	{{~it:value}}
+		<option value={{=value.ClassifyName}}>{{=value.ClassifyName}}</option>
+	{{~}}
+	</script>
+	<script id="newsComSelect" type="text/x-dot-template">
+	{{~it:value}}
+		<option value={{=value.ID}}>{{=value.CoName}}</option>
+	{{~}}
+	</script>
+	<script id="popWin" type="text/x-dot-template">
+		<div class="disabled_bg"></div>
+		<div class="pop_Msg_Win">
+			<span class="msgTitle">
+			{{?it.Title}}{{=it.Title}}{{??}}温馨提示{{?}}</span><i class='closeBtn bg_icon'></i>
+			<div class="msgContent">{{=it.Content}}</div>
+			{{?it.btns && it.btns.length>0}}
+				{{~it.btns:value}}
+					<span class="defineBtn {{=value.btnClassName}}">{{=value.btnName}}</span>
+				{{~}}
+			{{??}}
+				<span class="known">知道了</span>
+			{{?}}
+		</div>
+	</script>
+	<script id="publishedNewsList" type="text/x-dot-template">
+		<ul>
+			{{~it:value:index}}
+				<li _id={{=value.ID}}>
+					<span class='multipSele'><input {{?value.IsInUse==0}}disabled{{?}} class="newsCheckbox" type="checkbox" _id={{=value.ID}} /></span>
+					<span class='title_cell' _id={{=value.ID}}>{{?value.NewsShortTitle}}{{=value.NewsShortTitle}}{{??}}{{=value.NewsTitle}}{{?}}</span>
+					<span class='time_cell'>{{=value.timeStr}}</span>
+					<span class='author_cell'>{{=value.Author}}</span>
+					<span class='creater_cell'>{{=value.Creater}}</span>
+					<span class='isInUse_cell'>{{?value.IsInUse==1}}是{{??}}否{{?}}</span>
+					<span class='type_cell'>{{=value.NewsType}}</span>
+					<span class='isApproved_cell'>{{?value.NewsStatus==2}}是{{??}}否{{?}}</span>
+					<span class='op_cell'><span class="getDetail_btn"  _id={{=value.ID}}>查看详情</span><span class="del_btn"  _id={{=value.ID}}>删除</span></span>
+				</li>
+			{{~}}
+		</ul>
+	</script>
+	<script id="NewsInforDetail" type="text/x-dot-template">
+		<div class="disabled_bg"></div>
+		<div class="pop_newsDetail_Win">
+			<span class="newsHead">新闻详情</span><i class='closeBtn bg_icon'></i>
+			<div class="newsContent">
+				<p class="comment">注：<em>*</em>为可修改项</p>
+				<p><span><em>*</em>新闻标题：</span><input class='Title'  maxlength="100" style="width:500px" value="{{=it.NewsTitle}}" /></p>
+				<p><span class='vertical_top'><em>*</em>新闻摘要：</span><textarea class='short_content' maxlength="200" rows="3" cols="110">{{=it.NewsShortContent}}</textarea></p>
+				<p><span class='vertical_top'><em>*</em>新闻正文：</span><textarea class='all_content' maxlength="1000" rows="4" cols="110">{{=it.NewsTotalContent}}</textarea></p>
+				<p>
+					<span><em>*</em>是否有效：</span>
+					<select class="is_usable">
+						<option {{?it.IsInUse==1}}selected{{?}} value="1">是</option>
+						<option {{?it.IsInUse==0}}selected{{?}} value="0">否</option>
+					</select>
+				</p>
+				<p><span>创建时间：</span><input  disabled value="{{=it.timeStr}}" /></p>
+				<p><span>发布者：</span><input disabled value="{{=it.Creater}}" /></p>
+				<p><span>作者：</span><input disabled value="{{=it.Author}}" /></p>
+				<p><span><em>*</em>分类：</span><select class="newsType"></select></p>
+				<p><span>上次修改：</span><input disabled value="{{=it.LastModify}}" /></p>
+				<p><span>新闻状态：</span><input disabled value="{{?it.NewsStatus==2}}已发布{{??}}待审核{{?}}" /></p>
+				<span class='alterBtn' _id={{=it.ID}}>修改</span>
+			</div>
+		</div>
+	</script>
+	<script id="detailNewsType" type="text/x-dot-template">
+	{{~it.origin:value}}
+		<option {{?value.ClassifyName==it.selected}}selected{{?}} value={{=value.ClassifyName}}>{{=value.ClassifyName}}</option>
+	{{~}}
+	</script>
+	<script id="fenye" type="text/x-dot-template">
+		{{?it.total >11 && it.now>6 }}<span class="beforePage" onclick="{{=it.fenyeRenderFunction}}(1)">首页</span>{{?}}
+		{{?it.now >1}}<span class="beforePage" onclick="{{=it.fenyeRenderFunction}}({{=it.now-1}})">上一页</span>{{?}}
+		{{	var i = 1;
+			for(;i<=it.total;i++){
+				if((it.now<6 && i<12) || (it.now>it.total-5 && i>it.total-11) || (i<it.now+6 && i>it.now-6)){
+					}}
+					<span class="fenyeIndex {{?i==it.now}}nowPage{{?}}" onclick="{{=it.fenyeRenderFunction}}({{=i}})">{{=i}}</span>
+					{{
+				}
+			} 
+		}}
+		{{?it.now<it.total}}<span class="nextPage" onclick="{{=it.fenyeRenderFunction}}({{=it.now+1}})">下一页</span>{{?}}
+		{{?it.total >11 && it.now<it.total-5 }}<span class="nextPage" onclick="{{=it.fenyeRenderFunction}}({{=it.total}})">尾页</span>{{?}}
+	</script>
+	<script id="needApproveNewsList" type="text/x-dot-template">
+		<ul>
+			{{~it:value:index}}
+				<li _id={{=value.ID}}>
+					<span class='multipSele'><input class="newsCheckbox" type="checkbox" _id={{=value.ID}} /></span>
+					<span class='title_cell' _id={{=value.ID}} style='color:#333'>{{?value.NewsShortTitle}}{{=value.NewsShortTitle}}{{??}}{{=value.NewsTitle}}{{?}}</span>
+					<span class='summary' _id={{=value.ID}}>{{?value.shortSummary}}{{=value.shortSummary}}{{??}}{{=value.NewsShortContent}}{{?}}</span>
+					<span class='time_cell'>{{=value.timeStr}}</span>
+					<span class='creater_cell'>{{=value.Creater}}</span>
+					<span class='type_cell'>{{=value.NewsType}}</span>
+					<span class='op_cell'><span class="approveBtn" _id={{=value.ID}}>审批通过</span></span>
+				</li>
+			{{~}}
+		</ul>
+	</script>
+	<script id="timeoutNewsList" type="text/x-dot-template">
+		<ul>
+			{{~it:value:index}}
+				<li _id={{=value.ID}}>
+					<span class='multipSele'><input class="newsCheckbox" type="checkbox" _id={{=value.ID}} /></span>
+					<span class='title_cell' _id={{=value.ID}}>{{?value.NewsShortTitle}}{{=value.NewsShortTitle}}{{??}}{{=value.NewsTitle}}{{?}}</span>
+					<span class='time_cell'>{{=value.timeStr}}</span>
+					<span class='author_cell'>{{=value.Author}}</span>
+					<span class='creater_cell'>{{=value.Creater}}</span>
+					<span class='isInUse_cell'>{{?value.IsInUse==1}}是{{??}}否{{?}}</span>
+					<span class='type_cell'>{{=value.NewsType}}</span>
+					<span class='lastmodify_cell'>{{=value.LastModify}}</span>
+					<span class='op_cell'><span class="del_btn"  _id={{=value.ID}}>删除</span></span>
+				</li>
+			{{~}}
+		</ul>
+	</script>
+	<script id="ApprovingNewsList" type="text/x-dot-template">
+		<ul>
+			{{~it:value:index}}
+				<li _id={{=value.ID}}>
+					<span class='title_cell' _id={{=value.ID}} style='color:#333'>{{?value.NewsShortTitle}}{{=value.NewsShortTitle}}{{??}}{{=value.NewsTitle}}{{?}}</span>
+					<span class='summary' _id={{=value.ID}}>{{?value.shortSummary}}{{=value.shortSummary}}{{??}}{{=value.NewsShortContent}}{{?}}</span>
+					<span class='time_cell'>{{=value.timeStr}}</span>
+					<span class='creater_cell'>{{=value.Creater}}</span>
+					<span class='type_cell'>{{=value.NewsType}}</span>
+					<span class='status_cell'>{{?value.NewsStatus==1}}待审核{{??}}审批完成{{?}}</span>
+				</li>
+			{{~}}
+		</ul>
+	</script>
+</html>

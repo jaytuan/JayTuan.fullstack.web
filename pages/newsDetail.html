@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type","text/html;charset=utf-8">
+	<title>JNews</title>
+	<script type="text/javascript" src="//file.40017.cn/tcweb/pc/public/js/common/jquery/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="//file.40017.cn/huochepiao/pc/product/pcjs/doT.min.js?v=2017060603"></script>
+	<script type="text/javascript" src="http://ljt.qitouch.cn/static/js/newsDetail.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://ljt.qitouch.cn/static/css/newsDetail.css" />
+</head>
+<body>
+	<div class='news_head'>
+		<ul class='news_type'></ul>
+	</div>
+	<div class='news_content'></div>
+	<script id="thisNews" type="text/x-dot-template">
+		<h1 class='news_title'>{{=it.NewsTitle}}</h1>
+		<div class='date_source'><span class='date'>{{=it.timeStr}}</span> <span class='source'><strong>来源：</strong>{{=it.companyName}}</span></div>
+		<div class='summary'>{{=it.NewsShortContent}}</div>
+		{{?it.HotImg}}<div class='hotImg'><img title='{{=it.NewsTitle}}' src='{{=it.HotImg}}'></img></div>{{?}}
+		<div class='newsBody'><p>{{=it.NewsTotalContent}}</p></div>
+		<div class='news_author_creater'><span class='author'>作者：{{=it.Author}}</span><span class='creater'>发布者：{{=it.Creater}}</span><span class='telphone'><br/>以上如有侵权，请联系：{{=it.companyTel}}</span></div>
+	</script>
+	<script id="newsTypeList" type="text/x-dot-template">
+		<li class="new_type selected" _classifyName='首页'>首页</li>
+		{{~it:value}}
+			<li class="new_type" _classifyName="{{=value.ClassifyName}}">{{=value.ClassifyName}}</li>
+		{{~}}
+	</script>
+	<script id="popWin" type="text/x-dot-template">
+		<div class="disabled_bg"></div>
+		<div class="pop_Msg_Win">
+			<span class="msgTitle">
+			{{?it.Title}}{{=it.Title}}{{??}}温馨提示{{?}}</span><i class='closeBtn bg_icon'></i>
+			<div class="msgContent">{{=it.Content}}</div>
+			{{?it.btns && it.btns.length>0}}
+				{{~it.btns:value}}
+					<span class="defineBtn {{=value.btnClassName}}">{{=value.btnName}}</span>
+				{{~}}
+			{{??}}
+				<span class="known">知道了</span>
+			{{?}}
+		</div>
+	</script>
+</body>
+</html>

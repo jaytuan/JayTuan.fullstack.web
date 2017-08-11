@@ -1,7 +1,7 @@
 功能：
 ====
 #### 1.登录页   
-地址：http://www.jaytuan.top/pages/backLogin.html<br/>
+地址：http://106.14.179.61/pages/backLogin.html<br/>
 登录验证功能：（1）账户不存在 （2）密码错误<br/>
 账户分普通用户和超级用户，<br/>
 目前普通账户有： （1） username： common<br/>
@@ -13,7 +13,7 @@ Password：同上<br/>
 
 检测到已登录则跳转操作页面
 #### 2.操作页  
-地址：http://www.jaytuan.top/pages/backOperation.html<br/>
+地址：http://106.14.179.61/pages/backOperation.html<br/>
 功能模块 （1） 发布新闻功能 <br/>
 			普通用户发布新闻需要超级用户审核，发布完的新闻可在正在审核列表查看<br/>
 			超级用户发布新闻不需要审核，直接发布上线<br/>
@@ -24,8 +24,8 @@ Password：同上<br/>
 				功能：审批和批量审批通过  <br/>
 		 （5）过期模块（此模块为管理员处理删除已过期新闻）<br/>
 #### 3.用户页 
-地址：http://www.jaytuan.top/pages/newsList.html<br/>
+地址：http://106.14.179.61/pages/newsList.html<br/>
 功能：分页，搜索，banner，分类筛选等<br/>
 #### 4.新闻详情页 
-地址：http://www.jaytuan.top/pages/newsDetail.html?id=24<br/>
+地址：http://106.14.179.61/pages/newsDetail.html?id=24<br/>
 展示新闻详情
